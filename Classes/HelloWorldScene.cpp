@@ -83,7 +83,7 @@ bool HelloWorld::init()
 
     // add "HelloWorld" splash screen"
     sprite = Sprite::create("Spaceship.png");
-    sprite->setScale(0.75, 0.75);
+    sprite->setScale(0.33, 0.33);
     
 //    emissionParticle->setTotalParticles(77);
 //    emissionParticle->setDuration(ParticleSystem::DURATION_INFINITY);
@@ -131,6 +131,8 @@ bool HelloWorld::init()
                 this->addChild(bullet);
                 bullet->runAction(MoveTo::create(0.4, Vec2(sprite->getPositionX(), visibleSize.height + 100)));
                 this->schedule(schedule_selector(HelloWorld::shoot), 0.2f);
+                break;
+            default:
                 break;
         }
     };
