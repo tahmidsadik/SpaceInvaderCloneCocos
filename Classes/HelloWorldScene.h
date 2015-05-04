@@ -16,6 +16,7 @@ public:
     virtual bool init();
     
     virtual void shoot(float dt);
+    virtual void spawn_enemy(float dt);
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);

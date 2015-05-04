@@ -6,7 +6,6 @@ bool moveLeft;
 bool moveRight;
 bool moveUp;
 bool moveDown;
-bool isShooting;
 bool visibility;
 cocos2d::Sprite *sprite;
 
@@ -15,7 +14,6 @@ void initDefaultMove() {
     moveRight = false;
     moveUp = false;
     moveDown = false;
-    isShooting = false;
     visibility = false;
 }
 
@@ -59,6 +57,7 @@ bool HelloWorld::init()
     
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
                                 origin.y + closeItem->getContentSize().height/2));
+    log("Visible width: %f\nVisible Height: %f\nOrigin.x: %f\nOrigin.y %f", visibleSize.width, visibleSize.height, origin.x, origin.y);
 
     // create menu, it's an autorelease object
     auto menu = Menu::create(closeItem, NULL);
@@ -90,14 +89,12 @@ bool HelloWorld::init()
 //    emissionParticle->setEmitterMode(ParticleSystem::Mode::GRAVITY);
 
     // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    sprite->setPosition(Vec2(visibleSize.width/2, visibleSize.height/2));
 
     auto emissionParticle = ParticleSystemQuad::create("FireEmission.plist");
     auto emitParticle2 = ParticleSystemQuad::create("FireEmission.plist");
-    emissionParticle->setPosition(Vec2(sprite->getPositionX() - 260,
-                                       sprite->getPositionY() - 320));
-    emitParticle2->setPosition(Vec2(sprite->getPositionX() - 303,
-                                       sprite->getPositionY() - 320));
+    emissionParticle->setPosition(Vec2(visibleSize.width / 2 - sprite->getContentSize().width, visibleSize.height / 2 - sprite->getContentSize().height / 0.88));
+    emitParticle2->setPosition(Vec2(visibleSize.width / 2 - sprite->getContentSize().width / 1.1, visibleSize.height / 2 - sprite->getContentSize().height / 0.88));
     sprite->addChild(emissionParticle);
     sprite->addChild(emitParticle2);
 
@@ -123,15 +120,16 @@ bool HelloWorld::init()
             case EventKeyboard::KeyCode::KEY_D:
                 moveRight = true;
                 break;
-            case EventKeyboard::KeyCode::KEY_SPACE:
-//                isShooting = true;
+                
+                //weird c++ error switch case in protected scope so the next case is surrounded with braces.
+            {case EventKeyboard::KeyCode::KEY_SPACE:
                 auto bullet = Sprite::create("bullet.png");
                 bullet->setPosition(sprite->getPosition());
-                bullet->setScale(4.0, 4.0);
+                bullet->setScale(2.0, 2.0);
                 this->addChild(bullet);
                 bullet->runAction(MoveTo::create(0.4, Vec2(sprite->getPositionX(), visibleSize.height + 100)));
                 this->schedule(schedule_selector(HelloWorld::shoot), 0.2f);
-                break;
+                break;}
             default:
                 break;
         }
@@ -152,7 +150,6 @@ bool HelloWorld::init()
                         moveRight = false;
                         break;
                     case EventKeyboard::KeyCode::KEY_SPACE:
-                        isShooting = false;
                         this->unschedule(schedule_selector(HelloWorld::shoot));
                         break;
                     default:
@@ -163,6 +160,8 @@ bool HelloWorld::init()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
     
     this->scheduleUpdate();
+    this->schedule(schedule_selector(HelloWorld::spawn_enemy), 2.0f);
+    
     return true;
 }
 
@@ -170,13 +169,25 @@ void HelloWorld::shoot(float dt) {
     auto visibleSize = Director::getInstance()->getVisibleSize();
     auto bullet = Sprite::create("bullet.png");
     bullet->setPosition(sprite->getPosition());
-    bullet->setScale(4.0, 4.0);
+    bullet->setScale(2.0, 2.0);
     this->addChild(bullet);
     bullet->runAction(MoveTo::create(0.4, Vec2(sprite->getPositionX(), visibleSize.height + 100)));
 }
 
+void HelloWorld::spawn_enemy(float dt) {
+    
+    auto scrn_size = Director::getInstance()->getVisibleSize();
+    int space_for_enymy_plane = scrn_size.width / 5;
+    for(int i = 0; i < 5; i++) {
+        auto enemy = Sprite::create("cactus.png");
+        enemy->setPosition(Vec2(space_for_enymy_plane * i + 80, Director::getInstance()->getVisibleSize().height + 100));
+        enemy->setScale(0.8, 0.8);
+        enemy->runAction(MoveTo::create(8, Vec2(enemy->getPositionX(), -100)));
+        this->addChild(enemy, 1);
+    }
+}
+
 void HelloWorld::update(float dt) {
-    bool ableToShoot = false;
     int playerSpeed = 7;
     
     if (moveLeft && moveDown) {
@@ -195,17 +206,6 @@ void HelloWorld::update(float dt) {
         sprite->runAction(MoveBy::create(dt, Vec2(0, playerSpeed)));
     } else if(moveDown) {
         sprite->runAction(MoveBy::create(dt, Vec2(0, -playerSpeed)));
-    }
-    
-    if(isShooting) {
-        
-        ableToShoot = false;
-        auto visibleSize = Director::getInstance()->getVisibleSize();
-        auto bullet = Sprite::create("bullet.png");
-        bullet->setPosition(sprite->getPosition());
-        bullet->setScale(4.0, 4.0);
-        this->addChild(bullet);
-        bullet->runAction(MoveTo::create(0.4, Vec2(sprite->getPositionX(), visibleSize.height + 100)));
     }
 }
 

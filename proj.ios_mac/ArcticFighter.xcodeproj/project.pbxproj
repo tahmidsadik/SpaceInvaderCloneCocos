@@ -70,6 +70,8 @@
 		8F6980B91AF39A7300DFC62B /* FireEmission.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F6980B71AF39A7300DFC62B /* FireEmission.plist */; };
 		8F7EE7C81AF697C400C2646D /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F7EE7C71AF697C400C2646D /* bullet.png */; };
 		8F7EE7C91AF697C400C2646D /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F7EE7C71AF697C400C2646D /* bullet.png */; };
+		8FFF5BD81AF6EF3E00FB1458 /* cactus.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFF5BD71AF6EF3E00FB1458 /* cactus.png */; };
+		8FFF5BD91AF6EF3E00FB1458 /* cactus.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FFF5BD71AF6EF3E00FB1458 /* cactus.png */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -167,6 +169,7 @@
 		8F6980B41AF38FBB00DFC62B /* particle_texture.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = particle_texture.plist; sourceTree = "<group>"; };
 		8F6980B71AF39A7300DFC62B /* FireEmission.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FireEmission.plist; sourceTree = "<group>"; };
 		8F7EE7C71AF697C400C2646D /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
+		8FFF5BD71AF6EF3E00FB1458 /* cactus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cactus.png; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -291,6 +294,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8FFF5BD71AF6EF3E00FB1458 /* cactus.png */,
 				8F7EE7C71AF697C400C2646D /* bullet.png */,
 				8F6980B71AF39A7300DFC62B /* FireEmission.plist */,
 				8F6980B41AF38FBB00DFC62B /* particle_texture.plist */,
@@ -466,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
+				8FFF5BD81AF6EF3E00FB1458 /* cactus.png in Resources */,
 				8F7EE7C81AF697C400C2646D /* bullet.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
@@ -504,6 +509,7 @@
 				8F6980AC1AF36B1D00DFC62B /* Spaceship.png in Resources */,
 				8F6980B61AF38FBB00DFC62B /* particle_texture.plist in Resources */,
 				8F7EE7C91AF697C400C2646D /* bullet.png in Resources */,
+				8FFF5BD91AF6EF3E00FB1458 /* cactus.png in Resources */,
 				46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
